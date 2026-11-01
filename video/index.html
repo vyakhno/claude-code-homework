@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=block&subset=cyrillic" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #0d1012;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(ellipse 90% 80% at 50% 40%, #172024 0%, #0d1012 70%);
+      }
+      video.shot {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1920px;
+        height: 1080px;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-hz21" id="root" data-composition-id="main" data-start="0" data-duration="55.7" data-width="1920" data-height="1080">
+      <!-- Scenes; the voice-over starts at 0.5 s, so each scene starts with its sentence. -->
+      <div data-hf-id="hf-6c8m" id="intro" data-composition-id="intro" data-composition-src="compositions/intro.html" data-start="0" data-duration="4.0" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div data-hf-id="hf-n8wp" id="problem" data-composition-id="problem" data-composition-src="compositions/problem.html" data-start="4.0" data-duration="15.2" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div data-hf-id="hf-9qhr" id="solution" data-composition-id="solution" data-composition-src="compositions/solution.html" data-start="19.2" data-duration="11.2" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div data-hf-id="hf-7mpy" id="punch" data-composition-id="punch" data-composition-src="compositions/punch.html" data-start="30.4" data-duration="3.6" data-track-index="1" data-width="1920" data-height="1080"></div>
+
+      <!-- The hotel ad: Grok clips from that project, crossfading -->
+      <video data-hf-id="hf-3iur" id="h-room" class="clip shot" src="assets/clips/03-room.mp4" data-start="34.0" data-duration="2.4" data-track-index="2" muted playsinline style="z-index: 1"></video>
+      <video data-hf-id="hf-hhzf" id="h-breakfast" class="clip shot" src="assets/clips/05-breakfast.mp4" data-start="36.0" data-duration="2.4" data-track-index="3" muted playsinline style="z-index: 2"></video>
+      <video data-hf-id="hf-enc8" id="h-firehall" class="clip shot" src="assets/clips/06-firehall.mp4" data-start="38.0" data-duration="2.4" data-track-index="2" muted playsinline style="z-index: 3"></video>
+      <video data-hf-id="hf-67ha" id="h-cutlet" class="clip shot" src="assets/clips/12-cutlet.mp4" data-start="40.0" data-duration="2.4" data-track-index="3" muted playsinline style="z-index: 4"></video>
+      <video data-hf-id="hf-8rno" id="h-banquet" class="clip shot" src="assets/clips/10-banquet.mp4" data-start="42.0" data-duration="2.4" data-track-index="2" muted playsinline style="z-index: 5"></video>
+      <video data-hf-id="hf-050k" id="h-couple" class="clip shot" src="assets/clips/09-couple.mp4" data-start="44.0" data-duration="2.2" data-track-index="3" muted playsinline style="z-index: 6"></video>
+      <div data-hf-id="hf-dvsb" id="hotel" data-composition-id="hotel" data-composition-src="compositions/hotel.html" data-start="34.0" data-duration="12.2" data-track-index="4" data-width="1920" data-height="1080" style="z-index: 10"></div>
+
+      <div data-hf-id="hf-l4v5" id="result" data-composition-id="result" data-composition-src="compositions/result.html" data-start="46.2" data-duration="4.6" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div data-hf-id="hf-so03" id="end" data-composition-id="end" data-composition-src="compositions/end.html" data-start="50.8" data-duration="4.9" data-track-index="1" data-width="1920" data-height="1080"></div>
+
+      <!-- Gemini voice (Sulafat, Russian) over the Lyria lounge bed from the hotel ad -->
+      <audio data-hf-id="hf-o4pq" id="vo" class="clip" src="assets/audio/vo.wav" data-start="0.5" data-duration="50.3" data-track-index="5" data-volume="1"></audio>
+      <audio data-hf-id="hf-5kw4" id="music" class="clip" src="assets/audio/music-lyria.wav" data-start="0" data-duration="55.7" data-track-index="6" data-volume="0.13"></audio>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      // Hotel clips crossfade over each other, then the last one fades to the ground.
+      tl.fromTo("#h-room", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "sine.out" }, 34.0);
+      [["#h-breakfast", 36.0], ["#h-firehall", 38.0], ["#h-cutlet", 40.0], ["#h-banquet", 42.0], ["#h-couple", 44.0]].forEach(([id, t]) =>
+        tl.fromTo(id, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "sine.inOut" }, t),
+      );
+      tl.to("#h-couple", { opacity: 0, duration: 0.4, ease: "sine.in" }, 45.8);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

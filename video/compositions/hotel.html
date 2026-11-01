@@ -1,0 +1,37 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; font-family: "Montserrat", sans-serif; color: #f5eee4; }
+    #ho-scrim { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10, 8, 6, 0.7) 0%, rgba(10, 8, 6, 0) 35%, rgba(10, 8, 6, 0) 60%, rgba(10, 8, 6, 0.8) 100%); }
+    #ho-head { position: absolute; left: 160px; top: 110px; }
+    #ho-kicker { font-weight: 700; font-size: 30px; letter-spacing: 0.25em; text-transform: uppercase; color: #e8b46a; }
+    #ho-title { margin-top: 10px; font-weight: 800; font-size: 80px; line-height: 1.05; }
+    #ho-steps { position: absolute; left: 160px; right: 160px; bottom: 120px; display: flex; flex-wrap: wrap; gap: 18px; }
+    .ho-step { padding: 16px 28px; border-radius: 999px; background: rgba(20, 16, 13, 0.82); border: 2px solid rgba(232, 180, 106, 0.55); font-weight: 600; font-size: 32px; }
+  </style>
+  <div data-hf-id="hf-0g0n" id="root" data-composition-id="hotel" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-99lb" id="ho-scrim"></div>
+    <div data-hf-id="hf-5h99" id="ho-head">
+      <div data-hf-id="hf-q4k8" id="ho-kicker">Проект 2</div>
+      <div data-hf-id="hf-n3ns" id="ho-title">Реклама отеля «Нивки»<br data-hf-id="hf-x5px" />и ресторана</div>
+    </div>
+    <div data-hf-id="hf-e0x4" id="ho-steps">
+      <div data-hf-id="hf-qndx" class="ho-step" id="ho-1">Факты и фото: сайт, Booking, Instagram</div>
+      <div data-hf-id="hf-albk" class="ho-step" id="ho-2">Сценарий</div>
+      <div data-hf-id="hf-7usj" class="ho-step" id="ho-3">Grok оживил фото</div>
+      <div data-hf-id="hf-2oi7" class="ho-step" id="ho-4">Gemini озвучил</div>
+      <div data-hf-id="hf-lmkg" class="ho-step" id="ho-5">HyperFrames смонтировал</div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#ho-scrim", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "sine.out" }, 0);
+    tl.fromTo("#ho-kicker", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.1);
+    tl.fromTo("#ho-title", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.2);
+    // Each step lands on its verb: собрал 4.8, сценарий 7.3, оживил 8.5, озвучил 9.8, смонтировал 10.8
+    [["#ho-1", 4.8], ["#ho-2", 7.3], ["#ho-3", 8.5], ["#ho-4", 9.8], ["#ho-5", 10.8]].forEach(([id, t]) =>
+      tl.fromTo(id, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.45, ease: "back.out(1.6)" }, t),
+    );
+    tl.to("#ho-scrim, #ho-head, #ho-steps", { opacity: 0, duration: 0.4, ease: "sine.in" }, 11.8);
+    window.__timelines["hotel"] = tl;
+  </script>
+</template>

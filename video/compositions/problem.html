@@ -1,0 +1,61 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; font-family: "Montserrat", sans-serif; color: #eef2f0; }
+    #pb-head { position: absolute; left: 160px; top: 130px; }
+    #pb-kicker { font-weight: 700; font-size: 30px; letter-spacing: 0.25em; text-transform: uppercase; color: #5fd08a; }
+    #pb-title { margin-top: 10px; font-weight: 800; font-size: 96px; line-height: 1; }
+    #pb-row { position: absolute; left: 160px; right: 160px; top: 470px; display: flex; gap: 48px; }
+    .pb-card { flex: 1; padding: 44px 44px 52px; border-radius: 28px; background: #182024; border: 2px solid #26323a; }
+    .pb-name { font-weight: 700; font-size: 46px; }
+    .pb-app { display: inline-block; margin-top: 22px; padding: 10px 20px; border-radius: 999px; background: #232e35; font-weight: 600; font-size: 28px; color: #b8c2bd; }
+    .pb-status { margin-top: 44px; font-weight: 700; font-size: 34px; color: #5fd08a; }
+    .pb-status.down { display: none; color: #f26b5b; }
+    .pb-bar { margin-top: 26px; height: 18px; border-radius: 9px; background: #26323a; overflow: hidden; }
+    .pb-fill { height: 100%; width: 100%; border-radius: 9px; background: #5fd08a; transform-origin: left center; }
+  </style>
+  <div data-hf-id="hf-rs66" id="root" data-composition-id="problem" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-okpa" id="pb-head">
+      <div data-hf-id="hf-rm4u" id="pb-kicker">Проект 1</div>
+      <div data-hf-id="hf-r70w" id="pb-title">My Energy</div>
+    </div>
+    <div data-hf-id="hf-8xms" id="pb-row">
+      <div data-hf-id="hf-k2xu" class="pb-card" id="pb-c1">
+        <div data-hf-id="hf-gdj1" class="pb-name">Солтановка</div>
+        <div data-hf-id="hf-k00p" class="pb-app">Deye Cloud + SmartESS</div>
+        <div data-hf-id="hf-kp3z" class="pb-status ok">Сеть есть</div><div data-hf-id="hf-mm4f" class="pb-status down">Нет сети</div>
+        <div data-hf-id="hf-b2m2" class="pb-bar"><div data-hf-id="hf-fe9w" class="pb-fill"></div></div>
+      </div>
+      <div data-hf-id="hf-g4tt" class="pb-card" id="pb-c2">
+        <div data-hf-id="hf-qxuu" class="pb-name">Файна Таун</div>
+        <div data-hf-id="hf-3brs" class="pb-app">Deye Cloud</div>
+        <div data-hf-id="hf-ww4f" class="pb-status ok">Сеть есть</div><div data-hf-id="hf-g4n3" class="pb-status down">Нет сети</div>
+        <div data-hf-id="hf-57ku" class="pb-bar"><div data-hf-id="hf-zby4" class="pb-fill"></div></div>
+      </div>
+      <div data-hf-id="hf-fd60" class="pb-card" id="pb-c3">
+        <div data-hf-id="hf-j76e" class="pb-name">Отель</div>
+        <div data-hf-id="hf-gfn6" class="pb-app">SmartESS</div>
+        <div data-hf-id="hf-whte" class="pb-status ok">Сеть есть</div><div data-hf-id="hf-fqc2" class="pb-status down">Нет сети</div>
+        <div data-hf-id="hf-5lvv" class="pb-bar"><div data-hf-id="hf-y511" class="pb-fill"></div></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo(".pb-fill", { scaleX: 0.2 }, { scaleX: 0.78, duration: 2.6, ease: "sine.inOut" }, 5.4);
+    tl.fromTo("#pb-kicker", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.1);
+    tl.fromTo("#pb-title", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.2);
+    // Cards land on "три объекта с батареями" (2.7 s); the batteries charge until the apps appear
+    ["#pb-c1", "#pb-c2", "#pb-c3"].forEach((id, i) =>
+      tl.fromTo(id, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 2.7 + i * 0.6),
+    );
+    // "У каждого инвертора своё приложение" at 8.6 s
+    tl.fromTo(".pb-app", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)", stagger: 0.25 }, 8.6);
+    // "...узнаёшь, когда батарея уже садится" from 11.2 s
+    tl.set(".pb-status.ok", { display: "none" }, 11.2);
+    tl.set(".pb-status.down", { display: "block" }, 11.2);
+    tl.to(".pb-card", { borderColor: "#7a3530", duration: 0.4, ease: "sine.out" }, 11.2);
+    tl.to(".pb-fill", { scaleX: 0.12, backgroundColor: "#f26b5b", duration: 3.0, ease: "power1.in" }, 11.4);
+    tl.to("#pb-head, #pb-row", { opacity: 0, duration: 0.45, ease: "sine.in" }, 14.7);
+    window.__timelines["problem"] = tl;
+  </script>
+</template>

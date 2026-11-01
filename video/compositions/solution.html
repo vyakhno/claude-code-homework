@@ -1,0 +1,61 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; font-family: "Montserrat", sans-serif; color: #eef2f0; }
+    #sl-phone { position: absolute; left: 330px; top: 70px; width: 455px; height: 940px; padding: 14px; border-radius: 56px; background: #050607; border: 3px solid #2c373e; box-shadow: 0 40px 120px rgba(0, 0, 0, 0.55); }
+    #sl-screen { position: relative; width: 100%; height: 100%; border-radius: 44px; overflow: hidden; background: #111518; }
+    .sl-shot { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    #sl-tg { position: absolute; left: 250px; top: 120px; width: 640px; padding: 26px 30px; border-radius: 28px; background: rgba(36, 47, 61, 0.97); box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); display: flex; gap: 22px; }
+    #sl-tg-ava { flex: none; width: 72px; height: 72px; border-radius: 50%; background: #1e3a2a; display: grid; place-items: center; }
+    #sl-tg-app { font-weight: 600; font-size: 28px; color: #8fb4d8; }
+    #sl-tg-name { margin-top: 4px; font-weight: 700; font-size: 28px; }
+    #sl-tg-text { margin-top: 8px; font-weight: 500; font-size: 28px; line-height: 1.35; color: #e6ecf1; }
+    #sl-tg-text b { color: #ff7d6e; }
+    #sl-list { position: absolute; left: 960px; top: 250px; }
+    #sl-title { font-weight: 800; font-size: 64px; line-height: 1.05; margin-bottom: 44px; }
+    .sl-item { display: flex; align-items: center; gap: 22px; margin-top: 30px; font-weight: 600; font-size: 40px; }
+    .sl-dot { flex: none; width: 16px; height: 16px; border-radius: 50%; background: #5fd08a; }
+  </style>
+  <div data-hf-id="hf-52q8" id="root" data-composition-id="solution" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-tlqn" id="sl-phone">
+      <div data-hf-id="hf-sx4x" id="sl-screen">
+        <img data-hf-id="hf-mmu2" id="sl-s1" class="sl-shot" src="assets/shots/me-1-alerts.jpg" alt="" />
+        <img data-hf-id="hf-fbnx" id="sl-s2" class="sl-shot" src="assets/shots/me-4-data.jpg" alt="" />
+        <img data-hf-id="hf-8iye" id="sl-s3" class="sl-shot" src="assets/shots/me-5-events.jpg" alt="" />
+        <img data-hf-id="hf-v9v4" id="sl-s4" class="sl-shot" src="assets/shots/me-2-cards.jpg" alt="" />
+      </div>
+    </div>
+    <div data-hf-id="hf-i8nh" id="sl-list">
+      <div data-hf-id="hf-f985" id="sl-title">Один сайт<br data-hf-id="hf-x5px" />на три объекта</div>
+      <div data-hf-id="hf-s0wc" class="sl-item" id="sl-i1"><span data-hf-id="hf-aaeu" class="sl-dot"></span>Показания каждые 5 минут</div>
+      <div data-hf-id="hf-s3p6" class="sl-item" id="sl-i2"><span data-hf-id="hf-zjbu" class="sl-dot"></span>Журнал отключений</div>
+      <div data-hf-id="hf-8o7y" class="sl-item" id="sl-i3"><span data-hf-id="hf-zxmv" class="sl-dot"></span>«Хватит на ≈ 2 ч»</div>
+      <div data-hf-id="hf-mdok" class="sl-item" id="sl-i4"><span data-hf-id="hf-0bxw" class="sl-dot"></span>Сразу в Telegram</div>
+    </div>
+    <!-- Same wording as the bot's real alert (lib/notify.ts), with the hotel's figures from the screenshot -->
+    <div data-hf-id="hf-rggm" id="sl-tg">
+      <div data-hf-id="hf-gnxj" id="sl-tg-ava">
+        <svg data-hf-id="hf-mg2s" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#5fd08a" stroke-width="2.2" stroke-linejoin="round"><path data-hf-id="hf-gy5o" d="M13 2 4 14h7l-1 8 9-12h-7z" /></svg>
+      </div>
+      <div data-hf-id="hf-yeow">
+        <div data-hf-id="hf-2f7v" id="sl-tg-app">Telegram · сейчас</div>
+        <div data-hf-id="hf-pncw" id="sl-tg-name">My Energy</div>
+        <div data-hf-id="hf-c2u0" id="sl-tg-text"><b data-hf-id="hf-y4v2">●</b> Отель: нет сети с 20:59. Хватит на ≈ 2 ч.</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#sl-phone", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 0);
+    tl.fromTo("#sl-title", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.7, ease: "power3.out" }, 0.3);
+    // Screens and points follow the voice: 5 minutes 2.8 s, outages 5.35 s, runtime 6.9 s, Telegram 9.0 s
+    tl.set("#sl-s2, #sl-s3, #sl-s4", { opacity: 0 }, 0);
+    [["#sl-s2", "#sl-i1", 2.8], ["#sl-s3", "#sl-i2", 5.35], ["#sl-s4", "#sl-i3", 6.9]].forEach(([shot, item, t]) => {
+      tl.fromTo(shot, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "sine.inOut" }, t);
+      tl.fromTo(item, { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, t);
+    });
+    tl.fromTo("#sl-i4", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 9.0);
+    tl.fromTo("#sl-tg", { opacity: 0, y: -80 }, { opacity: 1, y: 0, duration: 0.6, ease: "back.out(1.4)" }, 7.8);
+    tl.to("#sl-phone, #sl-list, #sl-tg", { opacity: 0, duration: 0.35, ease: "sine.in" }, 10.85);
+    window.__timelines["solution"] = tl;
+  </script>
+</template>

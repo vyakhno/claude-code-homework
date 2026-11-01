@@ -1,0 +1,26 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; font-family: "Montserrat", sans-serif; color: #eef2f0; }
+    #en-title { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font-weight: 800; font-size: 96px; }
+    #en-title span { color: #e2875f; }
+    #en-rule { position: absolute; left: 50%; top: 480px; width: 140px; height: 3px; margin-left: -70px; background: #3a4750; }
+    #en-lines { position: absolute; left: 0; right: 0; top: 540px; text-align: center; font-weight: 600; font-size: 38px; line-height: 1.8; color: #b8c2bd; }
+    #en-lines b { color: #eef2f0; font-weight: 700; }
+  </style>
+  <div data-hf-id="hf-gwfo" id="root" data-composition-id="end" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-bm4s" id="en-title">Сделано с <span data-hf-id="hf-w2n4">Claude Code</span></div>
+    <div data-hf-id="hf-jeaj" id="en-rule"></div>
+    <div data-hf-id="hf-q0um" id="en-lines">
+      <div data-hf-id="hf-3wcd" id="en-l1"><b data-hf-id="hf-ekq1">My Energy</b> — мониторинг батарей для семьи и отеля</div>
+      <div data-hf-id="hf-l36l" id="en-l2"><b data-hf-id="hf-7rja">Реклама «Нивки»</b> — vyakhno.github.io/hotel-nivki-ad</div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#en-title", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.1);
+    tl.fromTo("#en-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 0.6);
+    tl.fromTo("#en-l1", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.9);
+    tl.fromTo("#en-l2", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 1.3);
+    window.__timelines["end"] = tl;
+  </script>
+</template>

@@ -1,0 +1,29 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; font-family: "Montserrat", sans-serif; color: #eef2f0; }
+    #rs-row { position: absolute; left: 0; right: 0; top: 380px; display: flex; justify-content: center; align-items: center; gap: 56px; font-weight: 800; font-size: 120px; line-height: 1; }
+    #rs-week { position: relative; color: #7d8a84; }
+    #rs-strike { position: absolute; left: -10px; right: -10px; top: 52%; height: 10px; border-radius: 5px; background: #f26b5b; transform-origin: left center; }
+    #rs-arrow { color: #e2875f; }
+    #rs-sub { position: absolute; left: 0; right: 0; top: 590px; text-align: center; font-weight: 600; font-size: 40px; color: #9aa5a0; }
+  </style>
+  <div data-hf-id="hf-6xgm" id="root" data-composition-id="result" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-gm7f" id="rs-row">
+      <div data-hf-id="hf-txg2" id="rs-week">неделя<div data-hf-id="hf-7vsz" id="rs-strike"></div></div>
+      <div data-hf-id="hf-eu4u" id="rs-arrow">→</div>
+      <div data-hf-id="hf-afgz" id="rs-eve">один вечер</div>
+    </div>
+    <div data-hf-id="hf-i0ub" id="rs-sub">≈ $2 на генерацию видео</div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#rs-week", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.2);
+    tl.fromTo("#rs-strike", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.inOut" }, 1.7);
+    // "Здесь — один вечер" at 2.5 s
+    tl.fromTo("#rs-arrow", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 2.3);
+    tl.fromTo("#rs-eve", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, 2.5);
+    tl.fromTo("#rs-sub", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "sine.out" }, 2.6);
+    tl.to("#rs-row, #rs-sub", { opacity: 0, duration: 0.3, ease: "sine.in" }, 4.3);
+    window.__timelines["result"] = tl;
+  </script>
+</template>

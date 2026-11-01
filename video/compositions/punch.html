@@ -1,0 +1,21 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; font-family: "Montserrat", sans-serif; color: #eef2f0; }
+    #pu-block { position: absolute; left: 0; right: 0; top: 400px; text-align: center; font-weight: 800; font-size: 104px; line-height: 1.15; }
+    #pu-a span { color: #5fd08a; }
+    #pu-b { color: #7d8a84; }
+  </style>
+  <div data-hf-id="hf-edrp" id="root" data-composition-id="punch" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-drg8" id="pu-block">
+      <div data-hf-id="hf-f86g" id="pu-a">Реагируем <span data-hf-id="hf-kk2z">вовремя</span>,</div>
+      <div data-hf-id="hf-8g08" id="pu-b">а не постфактум</div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#pu-a", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.25);
+    tl.fromTo("#pu-b", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 1.3);
+    tl.to("#pu-block", { opacity: 0, duration: 0.4, ease: "sine.in" }, 3.15);
+    window.__timelines["punch"] = tl;
+  </script>
+</template>
